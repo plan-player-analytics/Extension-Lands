@@ -57,6 +57,10 @@ public class LandsExtension implements DataExtension {
         lands = new LandsIntegration(plan);
     }
 
+    public LandsExtension(boolean forTesting) {
+        lands = null;
+    }
+
     @DataBuilderProvider
     public ExtensionDataBuilder playerData(UUID playerUUID) {
         LandPlayer landPlayer = lands.getLandPlayer(playerUUID);
