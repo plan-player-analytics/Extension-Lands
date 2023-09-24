@@ -6,7 +6,7 @@
 
     <groupId>net.playeranalytics</groupId>
     <artifactId>Extension-Lands</artifactId>
-    <version>5.4.12-R1.1</version>
+    <version>6.35.0-R1.2</version>
     <build>
         <plugins>
             <plugin>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.github.angeschossen</groupId>
             <artifactId>LandsAPI</artifactId>
-            <version>5.4.12</version>
+            <version>6.35.0</version>
             <scope>provided</scope>
         </dependency>
 

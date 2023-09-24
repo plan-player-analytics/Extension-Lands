@@ -31,14 +31,14 @@ import com.djrapitops.plan.extension.icon.Color;
 import com.djrapitops.plan.extension.icon.Family;
 import com.djrapitops.plan.extension.icon.Icon;
 import com.djrapitops.plan.extension.table.Table;
-import me.angeschossen.lands.api.integration.LandsIntegration;
+import me.angeschossen.lands.api.LandsIntegration;
 import me.angeschossen.lands.api.land.Land;
 import me.angeschossen.lands.api.player.LandPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Set;
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -54,7 +54,7 @@ public class LandsExtension implements DataExtension {
     public LandsExtension() {
         Plugin plan = Bukkit.getPluginManager().getPlugin("Plan");
         if (plan == null) throw new NotReadyException(); // What are the odds
-        lands = new LandsIntegration(plan);
+        lands = LandsIntegration.of(plan);
     }
 
     public LandsExtension(boolean forTesting) {
@@ -74,12 +74,12 @@ public class LandsExtension implements DataExtension {
                 .columnTwo("Size", Icon.called("expand-arrows-alt").build())
                 .columnThree("Spawn", Icon.called("map-pin").build());
 
-        Set<? extends Land> playerLands = landPlayer.getLands();
+        Collection<? extends Land> playerLands = landPlayer.getLands();
         for (Land land : playerLands) {
-            int size = land.getSize();
+            int size = land.getChunksAmount();
             totalLandSize += size;
             Location spawn = land.getSpawn();
-            int maxChunks = land.getMaxChunks(false);
+            int maxChunks = land.getMaxChunks();
             totalChunksAvailable += maxChunks;
             table.addRow(land.getName(), size + " / " + maxChunks, spawn != null ? "x:" + spawn.getBlockX() + " z:" + spawn.getBlockZ() : "unset");
         }
